@@ -6,7 +6,60 @@
 
 https://www.microsoft.com/en-ca/software-download/windows10ISO
 
+## Installation Notes
+
+#### Drive Reservations
+
+- 100GB for C Drive (Windows OS)
+- 120GB for D Drive (Main applications)
+- Rest for Data / Misc Drives
+
+#### MB Numbers for Drives
+
+- C: 103015MB (599MB System Reserves + 16MB Reserve + 100GB Allocation)
+- D: 102400MB (120GB Allocation)
+
+## Initial Setup
+
+- Select Region:
+  - US or Canada
+- Keyboard Layout: US
+  - Skip second keyboard layout setup
+
+Restart Prompt
+
+- How would you like to setup:
+  - Personal Use
+- Name of person to use this PC:
+  - Personal Name
+- Setup Password and Confirm
+- Setup 3 Security Questions
+- Do more with your voice:
+  - Don't use online speech recognition
+- Let Microsoft and apps use your location:
+  - No
+- Find my device:
+  - No
+- Diagnostic data to Microsoft:
+  - Only Required
+- Improve inking and typing:
+  - No
+- Get tailored experiences with diagnostic data:
+  - No
+- Let apps use advertising ID:
+  - No
+- Let Cortana help you get things done:
+  - Not Now
+
+Welcome Screen (This might take several minutes)
+
+Restart Computer (Manually right after landing in Windows)
+
 ## Post Installation Notes
+
+#### Enable High Refresh Rates for Monitors
+
+Right Click > Display Settings > Advanced display settings > Update refresh rates
 
 #### Start Menu
 
@@ -87,6 +140,8 @@ Start > Mouse settings > Additional mouse options > Pointer Options > Uncheck En
 https://www.mozilla.org/en-CA/firefox/new
 
 - Install uBlock Origin addon. Enable addon to run in incognito pages
+
+- Install Bitwarden addon
 
 - Options > Home > Firefox Home Content, disable all pages (optional)
 
