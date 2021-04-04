@@ -98,11 +98,13 @@ function CreateDirectory() {
 }
 
 function PromptProceed() {
-    $ProceedInput = Read-Host "Continue with script? (y/n)"
-    if ($ProceedInput -ne 'y') {
-        Write-SetupOutput "Stopping script, selected No"
-        Exit 0
-    }
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory)]
+        [String]$Message
+    )
+    $ProceedInput = Read-Host "Continue with: ${Message}? (y/n)"
+    return $ProceedInput -eq 'y'
 }
 
 function LoadPackages() {
@@ -142,16 +144,22 @@ function PromptDriveLetter() {
 }
 
 function InstallEdgeExtensions() {
+    if (!(PromptProceed -Message "Install Edge Extensions")) {
+        return
+    }
     # Bitwarden
     EdgeOpenUrl -Url "https://microsoftedge.microsoft.com/addons/detail/bitwarden-free-password/jbkfoedolllekgbhcbcoahefnbanhhlh?hl=en-US"
     # uBlock Origin
     EdgeOpenUrl -Url "https://microsoftedge.microsoft.com/addons/detail/ublock-origin/odfafepnkmbhccpbejgmiehpchacaeak?hl=en-US"
     # Google Drive
     EdgeOpenUrl -Url "https://drive.google.com/drive/my-drive"
-    PromptProceed
 }
 
 function DownloadPackages() {
+    if (!(PromptProceed -Message "Download Packages")) {
+        return
+    }
+
     ForEach ($Package in $Packages) {
         $PackageName = $Package.package
         Write-SetupOutput "Processing Package: ${PackageName}"
