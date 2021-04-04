@@ -1,0 +1,79 @@
+{
+    "Packages": [
+        {
+            "package": "Firefox",
+            "url": "https://www.mozilla.org/en-CA/firefox/new",
+            "file": "Firefox Installer.exe"
+        },
+        {
+            "package": "Chrome",
+            "url": "https://www.google.com/intl/en_ca/chrome",
+            "file": "ChromeSetup.exe"
+        },
+        {
+            "package": "Radeon Software",
+            "url": "https://www.amd.com/en/support/graphics/amd-radeon-6000-series/amd-radeon-6700-series/amd-radeon-rx-6700-xt",
+            "file": "radeon-software*.exe"
+        },
+        {
+            "package": "MSI Afterburner",
+            "url": "https://www.msi.com/Landing/afterburner",
+            "file": "MSIAfterburnerSetup.zip"
+        },
+        {
+            "package": "MSI Rivatuner",
+            "url": "https://www.msi.com/Landing/afterburner",
+            "file": "MSIAfterburnerSetup.zip"
+        },
+        {
+            "package": "HWiNFO64",
+            "url": "https://www.hwinfo.com/download",
+            "file": "hwi*.zip"
+        },
+        {
+            "package": "SublimeText",
+            "url": "https://www.sublimetext.com",
+            "file": "Sublime Text*.exe"
+        },
+        {
+            "package": "VSCode",
+            "url": "https://code.visualstudio.com",
+            "file": "VSCodeUserSetup*.exe"
+        },
+        {
+            "package": "Git",
+            "url": "https://git-scm.com/downloads",
+            "file": "Git*.exe"
+        },
+        {
+            "package": "PyCharm",
+            "url": "https://www.jetbrains.com/pycharm/download/#section=windows",
+            "file": "pycharm*.exe"
+        },
+        {
+            "package": "VirtualBox",
+            "url": "https://www.virtualbox.org/wiki/Downloads",
+            "file": "VirtualBox-*-Win.exe"
+        },
+        {
+            "package": "Discord",
+            "url": "https://discord.com",
+            "file": "DiscordSetup.exe"
+        },
+        {
+            "package": "Steam",
+            "url": "https://store.steampowered.com",
+            "file": "SteamSetup.exe"
+        },
+        {
+            "package": "EpicGames",
+            "url": "https://www.epicgames.com/store/en-US",
+            "file": "EpicInstaller*.msi"
+        },
+        {
+            "package": "UbisoftConnect",
+            "url": "https://ubisoftconnect.com/en-CA",
+            "file": "UbisoftConnectInstaller.exe"
+        }
+    ] 
+}
