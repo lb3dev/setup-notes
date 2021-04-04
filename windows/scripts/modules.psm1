@@ -127,7 +127,7 @@ function BuildPackagesFolders() {
     }
 }
 
-function Prompt_DriveLetter() {
+function PromptDriveLetter() {
     Write-SetupOutput "Here are the current drives on the system:"
     Get-PSDrive -PSProvider FileSystem
     $DriveLetter = Read-Host "Enter the drive letter to create folder scaffolding"
@@ -182,7 +182,7 @@ function DownloadPackages() {
 
 function InitialSetup() {
     LoadPackages
-    Prompt_DriveLetter
+    PromptDriveLetter
     BuildPackagesFolders
     InstallEdgeExtensions
     DownloadPackages
