@@ -165,7 +165,7 @@ function DownloadPackages() {
         Write-SetupOutput "Processing Package: ${PackageName}"
         $UrlOpened = $false
         $PackageFile = Join-Path -Path $script:DownloadsFolder -ChildPath $Package.file
-        $Counter = 60
+        $Counter = 150
         while ($Counter -gt 0) {
             $Items = Get-ChildItem $PackageFile -Name -ErrorAction SilentlyContinue
             if ($Items) {
@@ -178,7 +178,7 @@ function DownloadPackages() {
                     $UrlOpened = $true
                 }
             }
-            Start-Sleep -Seconds 5
+            Start-Sleep -Seconds 2
             $Counter--
         }
 
