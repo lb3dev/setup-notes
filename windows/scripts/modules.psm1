@@ -197,6 +197,10 @@ function DownloadPackages() {
 }
 
 function InitialSetup() {
+    if (!(PromptProceed -Message "Initial Setup (Create Folders, Download Packages)")) {
+        return
+    }
+
     LoadPackages
     PromptDriveLetter
     BuildPackagesFolders
