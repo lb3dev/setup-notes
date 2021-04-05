@@ -1,5 +1,5 @@
 # Powershell Files
-transcript.txt
+transcript*.txt
 
 # Compiled Python files
 *.pyc
