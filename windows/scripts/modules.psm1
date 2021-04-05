@@ -192,7 +192,7 @@ function DownloadPackages() {
         $ZippedFullname = $ZippedPackage.FullName
         $ZippedDestination = Join-Path -Path $script:DownloadsFolder -ChildPath $ZippedPackage.BaseName
         Write-SetupOutput "Unzipping: ${ZippedFullname} to ${ZippedDestination}"
-        Expand-Archive -Path $ZippedFullname -DestinationPath $ZippedDestination
+        Expand-Archive -Path $ZippedFullname -DestinationPath $ZippedDestination -Force
     }
 }
 
