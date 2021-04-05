@@ -62,7 +62,7 @@
         },
         {
             "package": "Steam",
-            "url": "https://store.steampowered.com",
+            "url": "https://store.steampowered.com/about",
             "file": "SteamSetup.exe"
         },
         {
@@ -74,6 +74,11 @@
             "package": "UbisoftConnect",
             "url": "https://ubisoftconnect.com/en-CA",
             "file": "UbisoftConnectInstaller.exe"
+        },
+        {
+            "package": "VLC",
+            "url": "https://www.videolan.org/vlc",
+            "file": "vlc*.exe"
         }
     ] 
 }
