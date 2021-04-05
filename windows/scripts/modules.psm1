@@ -186,6 +186,14 @@ function DownloadPackages() {
             Write-SetupOutput "Unable to download in the session timeframe: ${PackageFile}"
         }
     }
+
+    $ZippedPackages = Get-ChildItem $script:DownloadsFolder -Filter "*.zip"
+    ForEach ($ZippedPackage in $ZippedPackages) {
+        $ZippedFullname = $ZippedPackage.FullName
+        $ZippedDestination = Join-Path -Path $script:DownloadsFolder -ChildPath $ZippedPackage.BaseName
+        Write-SetupOutput "Unzipping: ${ZippedFullname} to ${ZippedDestination}"
+        Expand-Archive -Path $ZippedFullname -DestinationPath $ZippedDestination
+    }
 }
 
 function InitialSetup() {
