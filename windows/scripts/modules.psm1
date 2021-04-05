@@ -291,4 +291,33 @@ function DeliveryOptimization_DisableAllowDownloadsFromOtherPC {
     Delete-DeliveryOptimizationCache -Force
 }
 
+function RegeditCustomizations() {
+    if (!(PromptProceed -Message "Regedit Customizations")) {
+        return
+    }
+
+    # Themes
+
+    Themes_EnableDarkMode
+
+    # Start Menu
+
+    StartMenu_DisableWebSearches
+    StartMenu_DisableLocationAndCortana
+
+    # Explorer
+
+    Explorer_ShowHiddenFiles
+    Explorer_ShowFileExtensions
+
+    # Mouse
+
+    Mouse_SetDefaultSpeed
+    Mouse_DisableEnhancePointerPrecision
+
+    # Delivery Optimization
+
+    DeliveryOptimization_DisableAllowDownloadsFromOtherPC
+}
+
 Export-ModuleMember -Function * -Variable *
