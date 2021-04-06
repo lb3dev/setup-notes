@@ -1,8 +1,10 @@
 # Module Variables
 
 [String]$PackagesDrive = "D:\"
+[String]$GamesDrive = "E:\"
 $DownloadsFolder = $null
 $Packages = $null
+$Games = $null
 
 # Common Utility Functions
 
@@ -110,6 +112,7 @@ function PromptProceed() {
 function LoadPackages() {
     $json = (Get-Content ".\packages.json" -Raw) | ConvertFrom-Json
     $script:Packages = $json.Packages
+    $script:Games = $json.Games
     Write-SetupOutput "Loaded packages.json from current directory"
 }
 
@@ -129,14 +132,34 @@ function BuildPackagesFolders() {
     }
 }
 
-function PromptDriveLetter() {
+function BuildGamesFolders() {
+    $GamesDirectory = "Games"
+    CreateDirectory -Path $script:GamesDrive -Name $GamesDirectory
+    $GamesPath = Join-Path -Path $script:GamesDrive -ChildPath "Games"
+
+    ForEach ($Game in $Games) {
+        CreateDirectory -Path $GamesPath -Name $Game
+    }
+}
+
+function PromptDriveLetters() {
     Write-SetupOutput "Here are the current drives on the system:"
     Get-PSDrive -PSProvider FileSystem
-    $DriveLetter = Read-Host "Enter the drive letter to create folder scaffolding"
+    $DriveLetter = Read-Host "Enter the drive letter to create folder scaffolding for packages"
     $DrivePath = "${DriveLetter}:\"
     if (Test-Path -Path $DrivePath) {
         $script:PackagesDrive = $DrivePath
-        Write-SetupOutput "$DrivePath selected to create folder scaffolding"
+        Write-SetupOutput "$DrivePath selected to create folder scaffolding for packages"
+    } else {
+        Write-SetupOutput "Bad drive letter! Exiting session with error"
+        Exit 1
+    }
+
+    $DriveLetter = Read-Host "Enter the drive letter to create folder scaffolding for games"
+    $DrivePath = "${DriveLetter}:\"
+    if (Test-Path -Path $DrivePath) {
+        $script:GamesDrive = $DrivePath
+        Write-SetupOutput "$DrivePath selected to create folder scaffolding for games"
     } else {
         Write-SetupOutput "Bad drive letter! Exiting session with error"
         Exit 1
@@ -202,8 +225,9 @@ function InitialSetup() {
     }
 
     LoadPackages
-    PromptDriveLetter
+    PromptDriveLetters
     BuildPackagesFolders
+    BuildGamesFolders
     InstallEdgeExtensions
     DownloadPackages
 }

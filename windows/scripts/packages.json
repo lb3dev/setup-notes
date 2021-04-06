@@ -80,5 +80,6 @@
             "url": "https://www.videolan.org/vlc",
             "file": "vlc*.exe"
         }
-    ] 
+    ],
+    "Games": ["Steam", "Epic", "Ubisoft", "UbisoftCache"]
 }
