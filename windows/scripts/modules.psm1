@@ -323,7 +323,7 @@ function DeliveryOptimization_DisableAllowDownloadsFromOtherPC {
                             -Type DWord `
                             -Value 0
 
-    Write-Output "[Delivery Optimization] Deleting Delivery Optimization Cache..."
+    Write-TagOutput -Tag "Delivery Optimization" -Message "Deleting Delivery Optimization Cache..."
     Delete-DeliveryOptimizationCache -Force
 }
 
