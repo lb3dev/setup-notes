@@ -327,6 +327,33 @@ function DeliveryOptimization_DisableAllowDownloadsFromOtherPC {
     Delete-DeliveryOptimizationCache -Force
 }
 
+function PowerSettings_HighPerformanceAndNoSleeps {
+    Write-TagOutput -Tag "Power Settings" -Message "Switching to High Performance Scheme and Disable Sleeps"
+    if (!(CheckAdminRights)) {
+        Write-TagOutput -Tag "Power Settings" -Message "Skipped. Not running with Administrator rights"
+        return
+    }
+
+    Write-TagOutput -Tag "Power Settings" -Message "Current Power Configuration List:"
+    powercfg /list
+
+    $PowerCfg = Get-CimInstance -Name root\cimv2\power -Class win32_PowerPlan -Filter "ElementName = 'High Performance'"
+    $PowerCfgUUID = ([string]$PowerCfg.InstanceID).Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
+    powercfg /setactive $PowerCfgUUID
+
+    Write-TagOutput -Tag "Power Settings" -Message "Switching to High Performance Scheme with UUID: ${PowerCfgUUID}"
+
+    powercfg /change monitor-timeout-ac 0
+    powercfg /change monitor-timeout-dc 0
+
+    Write-TagOutput -Tag "Power Settings" -Message "Set Display Turn Off to Never"
+
+    powercfg /change standby-timeout-ac 0
+    powercfg /change standby-timeout-dc 0
+
+    Write-TagOutput -Tag "Power Settings" -Message "Set PC Sleep to Never"
+}
+
 function RegeditCustomizations() {
     if (!(PromptProceed -Message "Regedit Customizations")) {
         return
@@ -354,6 +381,10 @@ function RegeditCustomizations() {
     # Delivery Optimization
 
     DeliveryOptimization_DisableAllowDownloadsFromOtherPC
+
+    # Power Settings
+    
+    PowerSettings_HighPerformanceAndNoSleeps
 }
 
 Export-ModuleMember -Function * -Variable *
