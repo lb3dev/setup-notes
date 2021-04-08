@@ -60,6 +60,11 @@ function AddOrUpdateRegeditEntry {
         return
     }
 
+    if (-not (Test-Path $Path)) {
+        New-Item -Path $Path -Force
+        Write-Output "Created Path: ${Path}"
+    }
+
     if (Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue) {
         Set-ItemProperty -Path $Path -Name $Name -Type $Type -Value $Value 
     } else {
@@ -266,6 +271,44 @@ function StartMenu_DisableLocationAndCortana {
                             -Value 0
 }
 
+# Taskbar
+
+function Taskbar_HideCortana {
+    AddOrUpdateRegeditEntry -Message "[Taskbar] Hide Cortana" `
+                            -DefaultValues "(Show = 1, Hide = 0)" `
+                            -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+                            -Name "ShowCortanaButton" `
+                            -Type DWord `
+                            -Value 0
+}
+
+function Taskbar_HideTaskView {
+    AddOrUpdateRegeditEntry -Message "[Taskbar] Hide Task View" `
+                            -DefaultValues "(Show = 1, Hide = 0)" `
+                            -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+                            -Name "ShowTaskViewButton" `
+                            -Type DWord `
+                            -Value 0
+}
+
+function Taskbar_HidePeople {
+    AddOrUpdateRegeditEntry -Message "[Taskbar] Hide People" `
+                            -DefaultValues "(Show = 1, Hide = 0)" `
+                            -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" `
+                            -Name "PeopleBand" `
+                            -Type DWord `
+                            -Value 0
+}
+
+function Taskbar_HideWindowsInkWorkspace {
+    AddOrUpdateRegeditEntry -Message "[Taskbar] Hide Windows Ink Workspace" `
+                            -DefaultValues "(Show = 1, Hide = 0)" `
+                            -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PenWorkspace" `
+                            -Name "PenWorkspaceButtonDesiredVisibility" `
+                            -Type DWord `
+                            -Value 0
+}
+
 # File Explorer
 
 function Explorer_ShowHiddenFiles {
@@ -367,6 +410,13 @@ function RegeditCustomizations() {
 
     StartMenu_DisableWebSearches
     StartMenu_DisableLocationAndCortana
+
+    # Taskbar
+
+    Taskbar_HideCortana
+    Taskbar_HideTaskView
+    Taskbar_HidePeople
+    Taskbar_HideWindowsInkWorkspace
 
     # Explorer
 
