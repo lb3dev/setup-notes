@@ -46,6 +46,11 @@
             "file": "Git*.exe"
         },
         {
+            "package": "Python",
+            "url": "https://www.python.org/downloads",
+            "file": "python*.exe"
+        },
+        {
             "package": "PyCharm",
             "url": "https://www.jetbrains.com/pycharm/download/#section=windows",
             "file": "pycharm*.exe"
