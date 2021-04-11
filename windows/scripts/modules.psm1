@@ -309,6 +309,18 @@ function Taskbar_HideWindowsInkWorkspace {
                             -Value 0
 }
 
+function Taskbar_HideMeetNow {
+    AddOrUpdateRegeditEntry -Message "[Taskbar] Disable and Hide Meet Now" `
+                            -DefaultValues "(Show = 0, Hide = 1)" `
+                            -Admin $true `
+                            -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" `
+                            -Name "HideSCAMeetNow" `
+                            -Type DWord `
+                            -Value 1
+    Write-TagOutput -Tag "Taskbar" -Message "Restarting Windows Explorer..."
+    Stop-Process -Name "Explorer"
+}
+
 # File Explorer
 
 function Explorer_ShowHiddenFiles {
@@ -417,6 +429,7 @@ function RegeditCustomizations() {
     Taskbar_HideTaskView
     Taskbar_HidePeople
     Taskbar_HideWindowsInkWorkspace
+    Taskbar_HideMeetNow
 
     # Explorer
 
