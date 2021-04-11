@@ -61,14 +61,14 @@ function AddOrUpdateRegeditEntry {
     }
 
     if (-not (Test-Path $Path)) {
-        New-Item -Path $Path -Force
+        New-Item -Path $Path -Force | Out-Null
         Write-Output "Created Path: ${Path}"
     }
 
     if (Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue) {
         Set-ItemProperty -Path $Path -Name $Name -Type $Type -Value $Value 
     } else {
-        New-ItemProperty -Path $Path -Name $Name -Type $Type -Value $Value
+        New-ItemProperty -Path $Path -Name $Name -Type $Type -Value $Value | Out-Null
     }
 
     Write-Output "-Path ${Path} -Name ${Name} -Type ${Type} -Value ${Value} $DefaultValues"
