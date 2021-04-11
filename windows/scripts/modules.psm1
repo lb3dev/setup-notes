@@ -38,6 +38,8 @@ function CheckAdminRights() {
 function AddOrUpdateRegeditEntry {
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory)]
+        [String]$Tag,
         [String]$Message,
         [String]$DefaultValues,
         [bool]$Admin = $false,
@@ -52,17 +54,17 @@ function AddOrUpdateRegeditEntry {
     )
 
     if ($Message) {
-        Write-Output $Message
+        Write-TagOutput -Tag $Tag -Message $Message
     }
 
     if (!(CheckAdminRights) -and $Admin) {
-        Write-Output "Skipped. Not running with Administrator rights"
+        Write-TagOutput -Tag $Tag -Message "Skipped. Not running with Administrator rights"
         return
     }
 
     if (-not (Test-Path $Path)) {
         New-Item -Path $Path -Force | Out-Null
-        Write-Output "Created Path: ${Path}"
+        Write-TagOutput -Tag $Tag -Message "Created Path: ${Path}"
     }
 
     if (Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue) {
@@ -71,7 +73,7 @@ function AddOrUpdateRegeditEntry {
         New-ItemProperty -Path $Path -Name $Name -Type $Type -Value $Value | Out-Null
     }
 
-    Write-Output "-Path ${Path} -Name ${Name} -Type ${Type} -Value ${Value} $DefaultValues"
+    Write-TagOutput -Tag $Tag -Message "-Path ${Path} -Name ${Name} -Type ${Type} -Value ${Value} $DefaultValues"
 }
 
 function EdgeOpenUrl {
@@ -240,7 +242,8 @@ function InitialSetup() {
 # Themes
 
 function Themes_EnableDarkMode {
-    AddOrUpdateRegeditEntry -Message "[Themes] Enable Dark Mode" `
+    AddOrUpdateRegeditEntry -Tag "Themes" `
+                            -Message "Enable Dark Mode" `
                             -DefaultValues "(Dark = 0, Light = 1)" `
                             -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" `
                             -Name "AppsUseLightTheme" `
@@ -251,7 +254,8 @@ function Themes_EnableDarkMode {
 # Start Menu
 
 function StartMenu_DisableWebSearches {
-    AddOrUpdateRegeditEntry -Message "[Start Menu] Disable Web Searches" `
+    AddOrUpdateRegeditEntry -Tag "Start Menu" `
+                            -Message "Disable Web Searches" `
                             -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" `
                             -Name "BingSearchEnabled" `
                             -Type DWord `
@@ -259,12 +263,14 @@ function StartMenu_DisableWebSearches {
 }
 
 function StartMenu_DisableLocationAndCortana {
-    AddOrUpdateRegeditEntry -Message "[Start Menu] Disable Cortana" `
+    AddOrUpdateRegeditEntry -Tag "Start Menu" `
+                            -Message "Disable Cortana" `
                             -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" `
                             -Name "CortanaConsent" `
                             -Type DWord `
                             -Value 0
-    AddOrUpdateRegeditEntry -Message "[Start Menu] Disable Location" `
+    AddOrUpdateRegeditEntry -Tag "Start Menu" `
+                            -Message "Disable Location" `
                             -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" `
                             -Name "AllowSearchToUseLocation" `
                             -Type DWord `
@@ -274,7 +280,8 @@ function StartMenu_DisableLocationAndCortana {
 # Taskbar
 
 function Taskbar_HideCortana {
-    AddOrUpdateRegeditEntry -Message "[Taskbar] Hide Cortana" `
+    AddOrUpdateRegeditEntry -Tag "Taskbar" `
+                            -Message "Hide Cortana" `
                             -DefaultValues "(Show = 1, Hide = 0)" `
                             -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
                             -Name "ShowCortanaButton" `
@@ -283,7 +290,8 @@ function Taskbar_HideCortana {
 }
 
 function Taskbar_HideTaskView {
-    AddOrUpdateRegeditEntry -Message "[Taskbar] Hide Task View" `
+    AddOrUpdateRegeditEntry -Tag "Taskbar" `
+                            -Message "Hide Task View" `
                             -DefaultValues "(Show = 1, Hide = 0)" `
                             -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
                             -Name "ShowTaskViewButton" `
@@ -292,7 +300,8 @@ function Taskbar_HideTaskView {
 }
 
 function Taskbar_HidePeople {
-    AddOrUpdateRegeditEntry -Message "[Taskbar] Hide People" `
+    AddOrUpdateRegeditEntry -Tag "Taskbar" `
+                            -Message "Hide People" `
                             -DefaultValues "(Show = 1, Hide = 0)" `
                             -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" `
                             -Name "PeopleBand" `
@@ -301,7 +310,8 @@ function Taskbar_HidePeople {
 }
 
 function Taskbar_HideWindowsInkWorkspace {
-    AddOrUpdateRegeditEntry -Message "[Taskbar] Hide Windows Ink Workspace" `
+    AddOrUpdateRegeditEntry -Tag "Taskbar" `
+                            -Message "Hide Windows Ink Workspace" `
                             -DefaultValues "(Show = 1, Hide = 0)" `
                             -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PenWorkspace" `
                             -Name "PenWorkspaceButtonDesiredVisibility" `
@@ -310,7 +320,8 @@ function Taskbar_HideWindowsInkWorkspace {
 }
 
 function Taskbar_HideMeetNow {
-    AddOrUpdateRegeditEntry -Message "[Taskbar] Disable and Hide Meet Now" `
+    AddOrUpdateRegeditEntry -Tag "Taskbar" `
+                            -Message "Disable and Hide Meet Now" `
                             -DefaultValues "(Show = 0, Hide = 1)" `
                             -Admin $true `
                             -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" `
@@ -324,7 +335,8 @@ function Taskbar_HideMeetNow {
 # File Explorer
 
 function Explorer_ShowHiddenFiles {
-    AddOrUpdateRegeditEntry -Message "[Explorer] Show Hidden Files" `
+    AddOrUpdateRegeditEntry -Tag "Explorer" `
+                            -Message "Show Hidden Files" `
                             -DefaultValues "(Show = 1, Hide = 2)" `
                             -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
                             -Name "Hidden" `
@@ -333,7 +345,8 @@ function Explorer_ShowHiddenFiles {
 }
 
 function Explorer_ShowFileExtensions {
-    AddOrUpdateRegeditEntry -Message "[Explorer] Show File Extensions" `
+    AddOrUpdateRegeditEntry -Tag "Explorer" `
+                            -Message "Show File Extensions" `
                             -DefaultValues "(Show = 0, Hide = 1)" `
                             -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
                             -Name "HideFileExt" `
@@ -342,7 +355,8 @@ function Explorer_ShowFileExtensions {
 }
 
 function Mouse_SetDefaultSpeed {
-    AddOrUpdateRegeditEntry -Message "[Mouse] Set Default Speed" `
+    AddOrUpdateRegeditEntry -Tag "Mouse" `
+                            -Message "Set Default Speed" `
                             -DefaultValues "(Range 0-20)" `
                             -Path "HKCU:\Control Panel\Mouse" `
                             -Name "MouseSensitivity" `
@@ -351,18 +365,21 @@ function Mouse_SetDefaultSpeed {
 }
 
 function Mouse_DisableEnhancePointerPrecision {
-    AddOrUpdateRegeditEntry -Message "[Mouse] Disable Enhance Pointer Precision (Mouse Acceleration)" `
+    AddOrUpdateRegeditEntry -Tag "Mouse" `
+                            -Message "Disable Enhance Pointer Precision (Mouse Acceleration)" `
                             -DefaultValues "(Enabled = 1, Disabled = 0)" `
                             -Path "HKCU:\Control Panel\Mouse" `
                             -Name "MouseSpeed" `
                             -Type String `
                             -Value 0
-    AddOrUpdateRegeditEntry -DefaultValues "(Enabled = 6, Disabled = 0)" `
+    AddOrUpdateRegeditEntry -Tag "Mouse" `
+                            -DefaultValues "(Enabled = 6, Disabled = 0)" `
                             -Path "HKCU:\Control Panel\Mouse" `
                             -Name "MouseThreshold1" `
                             -Type String `
                             -Value 0
-    AddOrUpdateRegeditEntry -DefaultValues "(Enabled = 10, Disabled = 0)" `
+    AddOrUpdateRegeditEntry -Tag "Mouse" `
+                            -DefaultValues "(Enabled = 10, Disabled = 0)" `
                             -Path "HKCU:\Control Panel\Mouse" `
                             -Name "MouseThreshold2" `
                             -Type String `
@@ -370,7 +387,8 @@ function Mouse_DisableEnhancePointerPrecision {
 }
 
 function DeliveryOptimization_DisableAllowDownloadsFromOtherPC {
-    AddOrUpdateRegeditEntry -Message "[Delivery Optimization] Disable Allow Downloads From Other PCs" `
+    AddOrUpdateRegeditEntry -Tag "Delivery Optimization" `
+                            -Message "Disable Allow Downloads From Other PCs" `
                             -DefaultValues "(Enabled = 1, Disabled = 0)" `
                             -Admin $true `
                             -Path "Registry::HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" `
