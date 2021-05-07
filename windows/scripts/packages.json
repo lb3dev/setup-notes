@@ -86,5 +86,5 @@
             "file": "vlc*.exe"
         }
     ],
-    "Games": ["Steam", "Epic", "Ubisoft", "UbisoftCache"]
+    "Games": ["Steam", "Epic", "EpicCache", "Ubisoft", "UbisoftCache"]
 }
