@@ -85,9 +85,9 @@
             <STATE ID="2" Enabled="False" Value="50"/>
             <STATE ID="3" Enabled="False" Value="30"/>
             <STATE ID="4" Enabled="False" Value="60"/>
-            <STATE ID="5" Enabled="False" Value="40"/>
+            <STATE ID="5" Enabled="False" Value="50"/>
             <STATE ID="6" Enabled="False" Value="70"/>
-            <STATE ID="7" Enabled="False" Value="60"/>
+            <STATE ID="7" Enabled="False" Value="65"/>
             <STATE ID="8" Enabled="False" Value="85"/>
             <STATE ID="9" Enabled="False" Value="80"/>
         </STATES>
