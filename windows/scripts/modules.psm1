@@ -68,12 +68,17 @@ function AddOrUpdateRegeditEntry {
     }
 
     if (Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue) {
-        Set-ItemProperty -Path $Path -Name $Name -Type $Type -Value $Value 
+        $ExistingValue = Get-ItemPropertyValue -Path $Path -Name $Name
+        if ($ExistingValue -eq $Value) {
+            Write-TagOutput -Tag $Tag -Message "Not Modified: -Path ${Path} -Name ${Name} -Type ${Type} -Value ${Value} $DefaultValues"
+        } else {
+            Set-ItemProperty -Path $Path -Name $Name -Type $Type -Value $Value
+            Write-TagOutput -Tag $Tag -Message "Update: -Path ${Path} -Name ${Name} -Type ${Type} -Value ${Value} $DefaultValues"
+        }
     } else {
         New-ItemProperty -Path $Path -Name $Name -Type $Type -Value $Value | Out-Null
+        Write-TagOutput -Tag $Tag -Message "New: -Path ${Path} -Name ${Name} -Type ${Type} -Value ${Value} $DefaultValues"
     }
-
-    Write-TagOutput -Tag $Tag -Message "-Path ${Path} -Name ${Name} -Type ${Type} -Value ${Value} $DefaultValues"
 }
 
 function EdgeOpenUrl {
@@ -396,8 +401,10 @@ function DeliveryOptimization_DisableAllowDownloadsFromOtherPC {
                             -Type DWord `
                             -Value 0
 
-    Write-TagOutput -Tag "Delivery Optimization" -Message "Deleting Delivery Optimization Cache..."
-    Delete-DeliveryOptimizationCache -Force
+    if (CheckAdminRights) {
+        Delete-DeliveryOptimizationCache -Force
+        Write-TagOutput -Tag "Delivery Optimization" -Message "Deleted Delivery Optimization Cache"
+    }
 }
 
 function PowerSettings_HighPerformanceAndNoSleeps {
