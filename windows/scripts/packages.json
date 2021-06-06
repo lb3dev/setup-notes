@@ -56,6 +56,11 @@
             "file": "pycharm*.exe"
         },
         {
+            "package": "Inkscape",
+            "url": "https://inkscape.org/release/1.1/windows/64-bit",
+            "file": "inkscape*.exe"
+        },
+        {
             "package": "VirtualBox",
             "url": "https://www.virtualbox.org/wiki/Downloads",
             "file": "VirtualBox-*-Win.exe"
@@ -81,10 +86,15 @@
             "file": "UbisoftConnectInstaller.exe"
         },
         {
+            "package": "EA",
+            "url": "https://www.ea.com/ea-app-beta",
+            "file": "EADesktopInstaller.exe"
+        },
+        {
             "package": "VLC",
             "url": "https://www.videolan.org/vlc",
             "file": "vlc*.exe"
         }
     ],
-    "Games": ["Steam", "Epic", "EpicCache", "Ubisoft", "UbisoftCache"]
+    "Games": ["Steam", "Epic", "EpicCache", "Ubisoft", "UbisoftCache", "EA"]
 }
