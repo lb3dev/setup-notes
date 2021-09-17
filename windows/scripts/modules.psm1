@@ -256,6 +256,17 @@ function Themes_EnableDarkMode {
                             -Value 0
 }
 
+# Desktop
+
+function Desktop_DisableBackgroundJpegCompression {
+    AddOrUpdateRegeditEntry -Tag "Desktop" `
+                            -Message "Disable Background Jpeg Compression" `
+                            -Path "HKCU:\Control Panel\Desktop" `
+                            -Name "JPEGImportQuality" `
+                            -Type DWord `
+                            -Value 100
+}
+
 # Start Menu
 
 function StartMenu_DisableWebSearches {
@@ -442,6 +453,10 @@ function RegeditCustomizations() {
     # Themes
 
     Themes_EnableDarkMode
+
+    # Desktop
+
+    Desktop_DisableBackgroundJpegCompression
 
     # Start Menu
 
