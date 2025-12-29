@@ -8,6 +8,21 @@ https://www.microsoft.com/en-ca/software-download/windows10ISO
 
 ## Installation Notes
 
+### Local Account (Windows 11)
+
+Press Shift + F10 for cmd prompt during setup, at network setup:
+
+```shell
+start ms-cxh:localonly
+```
+
+25H2 (Initial setup screen):
+
+```shell
+reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE /v BypassNRO /t REG_DWORD /d 1 /f
+shutdown /r /t 0
+```
+
 #### Drive Reservations
 
 - 100GB for C Drive (Windows OS)
