@@ -13,6 +13,10 @@ https://www.microsoft.com/en-ca/software-download/windows10ISO
 Press Shift + F10 for cmd prompt during setup, at network setup:
 
 ```shell
+oobe\bypassnro
+```
+OR
+```shell
 start ms-cxh:localonly
 ```
 
