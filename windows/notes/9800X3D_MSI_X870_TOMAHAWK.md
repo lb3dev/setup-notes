@@ -3,7 +3,7 @@
 ### UEFI OC Configurations
 
 - #### CPU Settings
-    - PBO (Auto) -> Advanced
-    - Curve Optimizer: All Cores
-    - Offset: negative
-    - Offset value: -30
+    - Precision Boost Overdrive: [Auto] -> [Advanced]
+    - Curve Optimizer: [Disabled] -> [All Cores]
+    - All Core Curve Optimizer Sign: [Positive] -> [Negative]
+    - All Core Curve Optimizer Magnitude: [0] -> [30]
