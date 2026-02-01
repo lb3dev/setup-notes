@@ -150,6 +150,23 @@ Start > Mouse settings > Set cursor speed to 6 (no scaling)
 
 Start > Mouse settings > Additional mouse options > Pointer Options > Uncheck Enhance pointer precision
 
+## Optimizations
+
+Enable Ultimate Performance Power Plan
+```shell
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+```
+
+Nvidia Control Panel > Manage 3D Settings > OpenGL rendering GPU - Choose discrete GPU
+
+Nvidia Control Panel > Manage 3D Settings > Shader Cache size - 10GB
+
+Nvidia Control Panel > Manage 3D Settings > Vertical sync - Off
+
+Nvidia Control Panel > Manage 3D Settings > Low Latency Mode - On / Ultra
+
+Nvidia Control Panel > Manage 3D Settings > Power management mode - Prefer maximum performance
+
 ## Essential Programs
 
 #### Browsers
